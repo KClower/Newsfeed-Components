@@ -86,6 +86,31 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: "Downtown Round Rock, TX is Awesome",
+    date: "Mar 27th, 2024",
+    firstParagraph: `Bacon ipsum dolor amet short ribs turducken spare ribs ground round. 
+            Sirloin cow porchetta boudin chicken ball tip buffalo shoulder short loin venison
+            corned beef andouille chuck salami pork chop. Ham capicola ground round corned beef, 
+            pork salami fatback beef ribs jowl hamburger buffalo ham hock. Shoulder alcatra 
+            pork, flank jowl ground round salami beef ham hock venison turkey sausage leberkas 
+            meatloaf beef ribs. Turducken shankle tri-tip brisket alcatra spare ribs.`,
+
+    secondParagraph: `Jowl rump tail, drumstick hamburger capicola flank pastrami pancetta short 
+            ribs pig kevin kielbasa doner. Chuck leberkas ground round buffalo prosciutto 
+            landjaeger beef ribs. Shoulder pancetta beef ribs, ball tip turkey shankle kevin 
+            prosciutto porchetta sirloin tenderloin. Bresaola boudin flank drumstick kielbasa. 
+            Swine sirloin salami kielbasa prosciutto filet mignon turkey ball tip shoulder tail.`,
+            
+    thirdParagraph: `Kielbasa doner tongue fatback, shank jerky venison shankle ham hock 
+            pancetta salami porchetta. Kevin pig burgdoggen ham spare ribs landjaeger 
+            bacon porchetta. Jowl tail buffalo, salami chuck capicola prosciutto ribeye 
+            bresaola. Boudin alcatra kevin leberkas fatback frankfurter salami cow brisket 
+            drumstick meatball ribeye biltong swine. Beef ribs jowl rump t-bone, burgdoggen 
+            shank meatloaf tail kielbasa landjaeger chislic tongue short ribs cow. 
+            Landjaeger corned beef biltong shoulder kielbasa beef. Pork loin kevin boudin 
+            chuck chicken rump.`
   }
 ];
 
@@ -103,6 +128,7 @@ const data = [
     <span class="expandButton">+</span>
   </div>
 
+
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
 
@@ -114,3 +140,45 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker(obj){
+
+const article = document.createElement("div");
+const articleTitle = document.createElement("h2");
+const articleDate = document.createElement("p");
+const articleFirstPara = document.createElement("p");
+const articleSecondPara = document.createElement("p");
+const articleThirdPara = document.createElement("p");
+const articleButton = document.createElement("span");
+
+
+
+article.append(articleTitle, articleDate, articleFirstPara, articleSecondPara, articleThirdPara, articleButton);
+
+article.classList.add("article");
+articleDate.classList.add("date");
+articleButton.classList.add("expandButton");
+
+
+
+articleTitle.textContent = obj.title;
+articleDate.textContent = obj.date;
+articleFirstPara.textContent = obj.firstParagraph;
+articleSecondPara.textContent = obj.secondParagraph;
+articleThirdPara.textContent = obj.thirdParagraph;
+articleButton.textContent = "Article";
+
+articleButton.addEventListener("click", function(event){
+  article.classList.toggle("article-open");
+  console.log(event);
+})
+
+return article
+}
+
+const articles = document.querySelector(".articles");
+console.log(articles);
+
+data.map(data => {
+  articles.appendChild(articleMaker(data))
+})
